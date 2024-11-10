@@ -12,7 +12,7 @@
       },
     ];
   
-    let models = ["Formenschatztruhe/zykluscopy.gltf"];
+    let models = ["zykluscopy.gltf"];
   
     let cameraInitialPosition = new THREE.Vector3(-2,1,1);
   
