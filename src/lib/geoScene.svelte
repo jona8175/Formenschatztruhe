@@ -223,7 +223,7 @@
 
 
 <div bind:this={root} class="bind-div">
-  <body>
+  
     <div class = "animationtools">
       <div class = "toolbutton" on:click={() => stopAnim()}>stop</div>
       <div class = "toolbutton" on:click={() => playAnim()}>play</div>
@@ -257,7 +257,7 @@
         <iframe id="iframeVid" src={curentVideo}> </iframe>
       </div>
     {/if}
-  </body>
+  
 </div>
 
 <style>
