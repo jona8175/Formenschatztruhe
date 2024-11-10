@@ -16,7 +16,7 @@
   
     let cameraInitialPosition = new THREE.Vector3(-2,1,1);
   
-    let light_type = "DroneImageScene" /*DroneImageScene or 3DModel*/
+    let light_type = "3DModel" /*DroneImageScene or 3DModel*/
   
   
   </script>

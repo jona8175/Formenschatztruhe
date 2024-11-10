@@ -21,6 +21,25 @@
     toggle = false;
   }
 
+  //timing function
+  let desiredspeed = 0.05;
+  let playbackspeed = 0.05;
+
+  function stopAnim() {
+    playbackspeed = 0;
+  }
+  function playAnim() {
+    playbackspeed = desiredspeed;
+  }
+  function slowAnim() {
+    desiredspeed = desiredspeed * 0.5;
+    playbackspeed = desiredspeed;
+  }
+  function fastAnim() {
+    desiredspeed = desiredspeed * 2;
+    playbackspeed = desiredspeed;
+  }
+
   export let points = [];
   export let cameraInitialPosition = new THREE.Vector3(0, 3, 5);
   export let scene_background_color = "#ffffff";
@@ -53,14 +72,21 @@
        * Models
        */
 
-      
+      let mixer = null
 
       for (const block of models) {
         console.log(block);
         //add /TapRepWeb when deploying
         gltfLoader.load("/models/" + block , (gltf) => {
+
+          mixer = new THREE.AnimationMixer(gltf.scene)
+          const action = mixer.clipAction(gltf.animations[0])
+
+          action.play()
+
           gltf.scene.scale.set(1, 1, 1);
           gltf.scene.rotation.set(0, 0, 0);
+
           scene.add(gltf.scene);
           
 
@@ -136,6 +162,10 @@
         height: window.innerHeight,
       };
 
+      
+  
+
+      
       window.addEventListener("resize", () => {
         // Update sizes
         sizes.width = window.innerWidth;
@@ -154,8 +184,20 @@
       camera.position.y = cameraInitialPosition.y;
       camera.position.z = cameraInitialPosition.z;
 
+      
       const tick = () => {
+        //const elapsedTime = clock.getElapsedTime()
+        //const deltaTime = elapsedTime - previousTime
+        //previousTime = elapsedTime
+
         controls.update();
+
+        //mixer
+
+        if(mixer != null){
+          mixer.update(playbackspeed);
+        }
+        //
 
         for (const point of points) {
           // Get 2D screen position
@@ -178,9 +220,19 @@
   });
 </script>
 
+
+
 <div bind:this={root} class="bind-div">
   <body>
+    <div class = "animationtools">
+      <div class = "toolbutton" on:click={() => stopAnim()}>stop</div>
+      <div class = "toolbutton" on:click={() => playAnim()}>play</div>
+      <div class = "toolbutton" on:click={() => slowAnim()}>slow</div>
+      <div class = "toolbutton" on:click={() => fastAnim()}>fast</div>
+    </div>
+
     <canvas class="webgl"></canvas>
+    
 
     {#each points as point, i}
       <div
@@ -288,4 +340,33 @@
     padding: 0.5rem;
     border-radius: 0.5rem;
   }
+
+  .playbutton {
+
+  }
+  .animationtools{
+    position: absolute;
+    flex-direction: row;
+    background-color: rgb(175, 175, 201);
+    bottom: 5%;
+    left: 40%;
+    width: 20%;
+    height: 10%;
+    z-index: 5;
+  }
+
+  .toolbutton{
+    width: 100%;
+    text-wrap: wrap;
+    text-align: center;
+    background-color: rgb(209, 194, 194);
+  }
+  .toolbutton:hover{
+    width: 100%;
+    text-wrap: wrap;
+    text-align: center;
+    background-color: rgb(153, 173, 191);
+    cursor: default;
+  }
+
 </style>

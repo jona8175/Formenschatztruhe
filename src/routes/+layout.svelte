@@ -16,7 +16,7 @@ export const prerender = true;
     </ul>
   </label>
   <div class="nav-mobile">
-    <a href="/model">Model 1</a>
+    <a href="/Model">Model 1</a>
     <a href="#">Model 2</a>
     <a href="#">Model 3</a>
   </div>
