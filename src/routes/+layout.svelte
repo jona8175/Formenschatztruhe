@@ -9,14 +9,14 @@ export const prerender = true;
   <input type="checkbox" id="check">
   <label for="check" class ="checkbtn">
     <ul>
-      <li><a href="Formenschatztruhe/willkommen">Willkommen</a></li>
+      <li><a href="willkommen">Willkommen</a></li>
       <li><a >Modele</a></li>
       <li><a href="#"> Info</a></li>
       <li><a href="/help">Hilfe</a></li>
     </ul>
   </label>
   <div class="nav-mobile">
-    <a href="Formenschatztruhe/Model">Model 1</a>
+    <a href="Model">Model 1</a>
     <a href="#">Model 2</a>
     <a href="#">Model 3</a>
   </div>
