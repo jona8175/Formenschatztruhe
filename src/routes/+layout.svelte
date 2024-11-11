@@ -1,6 +1,9 @@
 
 <script>
 export const prerender = true;
+function reset(){
+  
+}
 </script>
 
 <div class = "bar">
@@ -9,7 +12,7 @@ export const prerender = true;
   <input type="checkbox" id="check">
   <label for="check" class ="checkbtn">
     <ul>
-      <li><a href="willkommen">Willkommen</a></li>
+      <li><a href="willkommen" on:click={() => reset()} >Willkommen</a></li>
       <li><a >Modele</a></li>
       <li><a href="#"> Info</a></li>
       <li><a href="/help">Hilfe</a></li>
@@ -17,8 +20,6 @@ export const prerender = true;
   </label>
   <div class="nav-mobile">
     <a href="Model">Model 1</a>
-    <a href="#">Model 2</a>
-    <a href="#">Model 3</a>
   </div>
 </nav>
 
@@ -116,7 +117,7 @@ export const prerender = true;
       display: none;
       position: absolute;
       top: 55px;
-      margin-left: 248px;
+      margin-left: 140px;
       overflow: hidden;
       background: var(--background_sec);
       z-index: 1;

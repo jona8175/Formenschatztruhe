@@ -16,6 +16,7 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"svelte-range-slider-pips": "^3.1.4",
 		"three": "^0.170.0"
 	}
 }

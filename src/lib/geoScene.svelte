@@ -5,6 +5,8 @@
 
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+  import RangeSlider from 'svelte-range-slider-pips';
+
   //import { gsap } from "gsap";
 
   let root;
@@ -22,23 +24,31 @@
   }
 
   //timing function
-  let desiredspeed = 0.05;
+
+  let values = [10];
+  
   let playbackspeed = 0.05;
 
+  let isPlaying = true;
+
   function stopAnim() {
-    playbackspeed = 0;
+    isPlaying = false;
   }
   function playAnim() {
-    playbackspeed = desiredspeed;
+    isPlaying =true;
   }
   function slowAnim() {
-    desiredspeed = desiredspeed * 0.5;
-    playbackspeed = desiredspeed;
+    playbackspeed *= 0.5;
   }
   function fastAnim() {
-    desiredspeed = desiredspeed * 2;
-    playbackspeed = desiredspeed;
+    playbackspeed *= 2;
   }
+
+  
+
+
+
+  
 
   export let points = [];
   export let cameraInitialPosition = new THREE.Vector3(0, 3, 5);
@@ -76,8 +86,8 @@
 
       for (const block of models) {
         console.log(block);
-        //add /TapRepWeb when deploying
-        gltfLoader.load("/Formenschatztruhe/models/" + block , (gltf) => {
+        //add /TapRepWeb bzw /Formenschatztruhewhen deploying
+        gltfLoader.load("/models/" + block , (gltf) => {
 
           mixer = new THREE.AnimationMixer(gltf.scene)
           const action = mixer.clipAction(gltf.animations[0])
@@ -193,11 +203,20 @@
         controls.update();
 
         //mixer
-
-        if(mixer != null){
+        
+        if(mixer != null && isPlaying){
+          if(mixer.time > 10) { mixer.setTime(0)}
           mixer.update(playbackspeed);
+          values[0]= mixer.time
         }
-        //
+
+
+        if(mixer != null && !isPlaying){
+          mixer.setTime(values);
+        }
+
+        
+        
 
         for (const point of points) {
           // Get 2D screen position
@@ -218,22 +237,38 @@
       tick();
     }
   });
+
+
+  function onGrab() {
+    isPlaying = false
+  }
+
+  
+
+
 </script>
 
 
 
 <div bind:this={root} class="bind-div">
   
-    <div class = "animationtools">
-      <div class = "toolbutton" on:click={() => stopAnim()}>stop</div>
-      <div class = "toolbutton" on:click={() => playAnim()}>play</div>
-      <div class = "toolbutton" on:click={() => slowAnim()}>slow</div>
-      <div class = "toolbutton" on:click={() => fastAnim()}>fast</div>
+    <div class = "controlbox">
+        <RangeSlider springValues={{ stiffness: 1, damping: 1 }} step={0.1} min={0} max={10} bind:values
+        on:start={((e) => { onGrab() })}
+        />
+      <div class ="animationtools">
+        <div class = "toolbutton" on:click={() => stopAnim()}>stop</div>
+        <div class = "toolbutton" on:click={() => playAnim()}>play</div>
+        <div class = "toolbutton" on:click={() => slowAnim()}>slow</div>
+        <div class = "toolbutton" on:click={() => fastAnim()}>fast</div>
+
+      </div>
+    
     </div>
 
     <canvas class="webgl"></canvas>
     
-
+    <!--
     {#each points as point, i}
       <div
         class="point"
@@ -257,6 +292,7 @@
         <iframe id="iframeVid" src={curentVideo}> </iframe>
       </div>
     {/if}
+    -->
   
 </div>
 
@@ -344,29 +380,33 @@
   .playbutton {
 
   }
-  .animationtools{
+  .controlbox{
+    
     position: absolute;
-    flex-direction: row;
+    flex-direction: column;
     background-color: rgb(175, 175, 201);
-    bottom: 5%;
+    bottom: 15%;
     left: 40%;
     width: 20%;
     height: 10%;
     z-index: 5;
+
+  }
+  .animationtools{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
   }
 
   .toolbutton{
-    width: 100%;
-    text-wrap: wrap;
+    width: 50px;
     text-align: center;
     background-color: rgb(209, 194, 194);
+    cursor: default;
   }
   .toolbutton:hover{
-    width: 100%;
-    text-wrap: wrap;
-    text-align: center;
     background-color: rgb(153, 173, 191);
-    cursor: default;
   }
 
 </style>
