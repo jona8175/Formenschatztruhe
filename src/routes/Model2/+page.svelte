@@ -12,7 +12,7 @@
       },
     ];
   
-    let models = ["zykluscopy.gltf"];
+    let models = ["HimalayaNewAnim.gltf"];
   
     let cameraInitialPosition = new THREE.Vector3(25,15,3);
 

@@ -12,7 +12,7 @@
       },
     ];
   
-    let models = ["zykluscopy.gltf"];
+    let models = ["GeologischeAbfolgeBeispiel.gltf","GeologischeAbfolgeBeispiel2.gltf"];
   
     let cameraInitialPosition = new THREE.Vector3(25,15,3);
 

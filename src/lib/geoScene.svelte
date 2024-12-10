@@ -1,7 +1,7 @@
 <script>
   import { browser } from "$app/environment";
   import * as THREE from "three";
-  import { onMount } from "svelte";
+  import { getAllContexts, onMount } from "svelte";
 
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -29,7 +29,7 @@
   
   let playbackspeed = 0.05;
 
-  let isPlaying = true;
+  let isPlaying = false;
 
   function stopAnim() {
     isPlaying = false;

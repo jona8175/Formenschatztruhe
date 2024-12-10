@@ -2,9 +2,8 @@
 
 <body>
     
-    <h1>Wilkommen zur Formenschatztruhe</h1>
-    <p>Auf dieser Website werden geologische und geomorphologische 3D Modele präsentiert. </p>
+    <h1>Willkommen, diese Website ist noch im Aufbau.</h1>
+    <p>Die Seite ist online, dass ich denn Fortschritt der Website einfach Teilen kann. </p>
     <br>
-    <p>Test to Merge 2</p>
     
 </body>

@@ -14,12 +14,12 @@ function reset(){
     <ul>
       <li><a href="willkommen" on:click={() => reset()} >Willkommen</a></li>
       <li><a >Modele</a></li>
-      <li><a href="#"> Info</a></li>
-      <li><a href="/help">Hilfe</a></li>
     </ul>
   </label>
   <div class="nav-mobile">
-    <a href="Model">Model 1</a>
+    <a href="Model">Wilsonzyklus</a>
+    <a href="Model2">Himalaya</a>
+
   </div>
 </nav>
 
