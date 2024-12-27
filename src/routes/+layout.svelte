@@ -1,11 +1,8 @@
-
 <script>
 export const prerender = true;
 function reset(){
-  
 }
 </script>
-
 <div class = "bar">
 </div>
 <nav class = "menu">

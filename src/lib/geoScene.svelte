@@ -87,7 +87,7 @@
       for (const block of models) {
         console.log(block);
         //add /TapRepWeb bzw /Formenschatztruhewhen deploying
-        gltfLoader.load("/Formenschatztruhe/models/" + block , (gltf) => {
+        gltfLoader.load("./models/" + block , (gltf) => {
 
           mixer = new THREE.AnimationMixer(gltf.scene)
           const action = mixer.clipAction(gltf.animations[0])
